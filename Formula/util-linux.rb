@@ -12,6 +12,7 @@ class UtilLinux < Formula
     "LGPL-2.1-or-later",
     :public_domain,
   ]
+  revision 1
 
   bottle do
     sha256 arm64_big_sur: "922d09f5174a8987fdd7de56103eb6415a561c7490ab149e86bd8959c5832044"
@@ -34,10 +35,10 @@ class UtilLinux < Formula
   def install
     args = std_configure_args + %w[
       --disable-silent-rules
+      --disable-hardlink
     ]
 
     on_macos do
-      args << "--disable-hardlink" # does not build on macOS
       args << "--disable-ipcs" # does not build on macOS
       args << "--disable-ipcrm" # does not build on macOS
       args << "--disable-wall" # already comes with macOS
@@ -76,7 +77,7 @@ class UtilLinux < Formula
       delpart dmesg
       eject
       fallocate fdformat fincore findmnt fsck fsfreeze fstrim
-      hardlink hwclock
+      hwclock
       ionice ipcrm ipcs
       kill
       last ldattach losetup lsblk lscpu lsipc lslocks lslogins lsmem lsns
